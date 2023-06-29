@@ -32,3 +32,18 @@ class Solution:
     
 sol = Solution()
 print(sol.reorderLogFiles(["zoey i love you","lucas i love you","rong i love you"]))
+
+# study books - 1. lambda + sort() & '+' operator
+def reorderLogFiles(logs: list[str]) -> list[str]:
+    letters = []
+    digits = []
+    for i in range(len(logs)):
+        if logs[i].split()[1].isdigit():
+            digits.append(logs[i])
+        else:
+            letters.append(logs[i])
+    # letters.sort(key=lambda x: (x[x.find(' ')+1:], x[:x.find(' ')]))
+    letters.sort(key=lambda x: (x.split()[1:], x.split()[0]))
+    return letters + digits
+    
+reorderLogFiles(["zoey i love you","lucas i love you","rong i love you"])
