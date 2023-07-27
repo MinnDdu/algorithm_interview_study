@@ -3,7 +3,7 @@
 # The product of any prefix or suffix of nums is guaranteed to fit in a 32-bit integer.
 # You must write an algorithm that runs in O(n) time and without using the division operation.
 
-# My answer
+# My answer - Space Complexity O(1) 안됨
 class Solution:
     def productExceptSelf(self, nums: list[int]) -> list[int]:
         result = []
@@ -34,3 +34,18 @@ class Solution:
 s1 = Solution()
 print(s1.productExceptSelf([4,3,2,1,2]))
         
+# Study book - 1. w/ Space Complexity O(1)
+def productExceptSelf(nums: list[int]) -> list[int]:
+    result = [] # output space is not considered for space complexity
+
+    p = 1
+    for i in range(len(nums)):
+        result.append(p)
+        p = p * nums[i]
+    
+    p = 1
+    for i in range(len(nums) - 1, -1, -1):
+        result[i] *= p
+        p = p * nums[i]
+
+    return result
