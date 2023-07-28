@@ -32,7 +32,7 @@ print(sol.isPalindrome(l1))
 
 # Study book - 1. conversion to list(queue) -> To know whether it is palindrome, I need a DS that front/back accesses are available
 # q.pop(0) -> O(n) because list automatially shift all the elements of list to left (one slot) 
-def isPalinedrome(head: ListNode) -> bool:
+def isPalindrome(head: ListNode) -> bool:
     q: list = []
     
     if not head:
@@ -50,7 +50,7 @@ def isPalinedrome(head: ListNode) -> bool:
 
 # Study book - 2. Optimization w/ Deque
 # Deque - Doubliy Linked List -> poping the first/last element takes O(1)
-def isPalinedrome(head: ListNode) -> bool:
+def isPalindrome(head: ListNode) -> bool:
     q: collections.deque = collections.deque()
     if not head:
         return True
@@ -65,4 +65,34 @@ def isPalinedrome(head: ListNode) -> bool:
     return True
 
 # Study book - 3. Runner Method**
-#  
+# Fast Runner -> stride 2 nodes / Slow Runner -> stride 1 node
+# When Fast Runner finishes the traverse, Slow Runner must be at middle point
+def isPalindrome(head: ListNode) -> bool:
+    rev: ListNode = None
+    fast = slow = head
+
+    while fast and fast.next:
+        fast = fast.next.next
+        rev, rev.next, slow = slow, rev, slow.next
+        # ** Caution - What if this code? **
+        # -----------------------------------
+        # rev, rev.next = slow, rev
+        # slow = slow.next
+        # -----------------------------------
+        # rev = slow <- Both 'rev' and 'slow' point same linked list
+        # Thus, slow = slow.next also changes the result of 'rev'
+
+    if fast: # when the elements of linked list -> # elements of list is ODD
+        slow = slow.next
+    
+    while rev:
+        if rev.val != slow.val:
+            return False
+        rev = rev.next
+        slow = slow.next
+    
+    return True
+
+print(isPalindrome(l1))
+
+        
