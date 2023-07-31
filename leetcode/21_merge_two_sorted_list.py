@@ -40,6 +40,7 @@ class Solution:
 
 # Study Book - 1. Linkig w/ Recursion 
     def mergeTwoLists(self, list1: ListNode, list2: ListNode) -> ListNode:
+        # list1.val > list2.val - swap two nodes thus small value can come to list1
         if (not list1) or (list2 and list1.val > list2.val):
             list1, list2 = list2, list1
         if list1:
