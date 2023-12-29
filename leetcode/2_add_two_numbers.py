@@ -1,4 +1,4 @@
-# 2. Add Two Numbers = Medium
+# 2. Add Two Numbers - Medium
 import collections
 
 # My answer
