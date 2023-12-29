@@ -22,5 +22,11 @@ class Solution:
             head = head.next
         return root.next
     
-
-
+    # Study book - 1. recursive swap
+    def swapPairs(self, head: ListNode) -> ListNode:
+        if head and head.next:
+            ptr = head.next
+            head.next = self.swapPairs(ptr.next) # like head.next = haed.next.next
+            ptr.next = head # like prev.next = head
+            return ptr
+        return head
